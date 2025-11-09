@@ -1,4 +1,6 @@
-import { Pool } from 'pg';
-import { config } from '../config/config';
+import knex from 'knex';
+import knexConfig from '../../knexfile';
+import { config }s from '../config/config';
 
-export const pgPool = new Pool(config.db);
+const environment = config.env || 'development';
+export const db = knex(knexConfig[environment]);

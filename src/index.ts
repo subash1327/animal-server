@@ -6,8 +6,7 @@ import bodyParser from 'body-parser';
 import pino from 'pino';
 import { postgraphile } from 'postgraphile';
 import { pgPool } from './db';
-import { healthzRouter } from './modules/healthz';
-import { usersRouter } from './modules/users';
+import { router } from './router';
 import { config } from './config/config';
 
 const app = express();
@@ -32,8 +31,7 @@ app.use(
   }),
 );
 
-app.use('/healthz', healthzRouter);
-app.use('/api/users', usersRouter);
+app.use('/api/v1', router);
 
 app.listen(config.app.port, () => {
   logger.info(`Server is running on port ${config.app.port}`);
